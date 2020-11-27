@@ -56,8 +56,12 @@
                 </v-card>
               </v-col>
             </v-row>
-            <v-card max-height="100" elevation="2">
+            <v-card class="mx-auto">
               <v-subheader>Maps</v-subheader>
+              <Map class="mx-auto"
+                :latitude="chartData.lat[0]"
+                :longitude="chartData.lng[0]"
+              />
             </v-card>
           </v-container>
         </v-card>
@@ -72,6 +76,7 @@ import { db } from "./db";
 import VueChart from "vue-chart";
 import arusip from "./arusip";
 import moment from "moment";
+import Map from './components/Map.vue'
 Vue.use(VueChart);
 const dataTampil = 20;
 export default {
@@ -103,13 +108,24 @@ export default {
       let nilaiAZ_1 = [];
       let tanggal_1 = [];
       let tanggal_baru_1 = [];
+      let Vlat = [];
+      let Vlng = [];
       this.grafiks.every((e) => {
         if (e.dev_id == "arusip_lora1") {
           nilaiAX_1.push(e.payload_fields.ax);
           nilaiAY_1.push(e.payload_fields.ay);
           nilaiAZ_1.push(e.payload_fields.az);
           tanggal_1.push(e.metadata.time);
+          Vlat.push(e.metadata.latitude)
+          Vlng.push(e.metadata.longitude)
+                      if( tanggal_1===dataTampil){
+                       if( Vlat.length===1 &&  Vlng.length===1){
+              return false;
+            }
+              return false;
+            }
         }
+
         return true;
       });
       for (let i = 0; i < tanggal_1.length; i++) {
@@ -148,10 +164,12 @@ export default {
             data: nilaiAZ_1,
           },
         ],
+        lat : Vlat,
+        lng : Vlng
       };
     },
   },
-  components: { arusip },
+  components: { arusip, Map },
   mounted() {
     setInterval(this.generateData, 2000);
   },
