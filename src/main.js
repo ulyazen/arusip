@@ -3,7 +3,7 @@ import { rtdbPlugin } from 'vuefire'
 import App from './App.vue';
 import vuetify from './plugins/vuetify';
 // import * as VueGoogleMaps from 'vue2-google-maps'
- 
+
 // Vue.use(VueGoogleMaps, {
 //   load: {
 //     key: 'AIzaSyBCFNaKZ73uiidUpfTsbnY4MuoM5-I_llk',

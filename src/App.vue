@@ -3,14 +3,14 @@
     <v-navigation-drawer v-model="drawer" app>
       <v-sheet class="pa-4">
         <v-avatar class="mb-4" color="grey darken-1" size="64"></v-avatar>
-        <div>ARUSIP</div>
+        <div>PantauLongsor.id</div>
       </v-sheet>
       <v-divider></v-divider>
       <v-list-item-group nav dense>
-        <v-list-item-group active-class="deep-purple--text text--accent-4">
+        <v-list-item-group active-class="primary--text text--accent-4">
           <v-list-item v-once v-for="[icon, text] in links" :key="icon" link>
             <v-list-item-icon>
-              <v-icon>{{ icon }}</v-icon>
+              <v-icon color="primary">{{ icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>{{ text }}</v-list-item-title>
@@ -39,8 +39,7 @@
                   <v-card-text>
                     <v-divider class="my-2"></v-divider>
                     <v-chip-group
-                      v-model="selection1"
-                      active-class="deep-purple accent-4 white--text"
+                      active-class="primary accent-4 white--text"
                       column
                     >
                       <v-chip>Live</v-chip>
@@ -55,14 +54,92 @@
                   </v-card-text>
                 </v-card>
               </v-col>
+              <v-col cols="12" sm="6" md="8">
+                <v-card class="mx-auto">
+                  <v-subheader>Description</v-subheader>
+                  <v-card-text>
+                    <p class="text-justify">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Sed laoreet et odio a laoreet. Maecenas at euismod nunc,
+                      volutpat cursus metus. Donec sed ipsum vestibulum,
+                      venenatis diam eu, venenatis risus. Vivamus semper ex a
+                      purus volutpat congue. Etiam fermentum, dui id blandit
+                      tempus, tellus lacus pellentesque ligula, at semper nisi
+                      purus sit amet tellus. Nam facilisis mauris et libero
+                      posuere porttitor. Nam massa mi, auctor at augue
+                      vestibulum, varius feugiat felis. Nullam at elit
+                      porttitor, dapibus metus eu, bibendum tortor. Maecenas
+                      porta vulputate dolor eu vestibulum. Nunc accumsan, enim a
+                      mattis fermentum, nibh lacus ultrices nunc, vel facilisis
+                      sem leo sit amet sapien. Etiam ornare neque felis, quis
+                      interdum nisi dapibus a. Nam eu ante facilisis, tincidunt
+                      ligula in, consequat risus. Maecenas in sollicitudin
+                      neque, finibus maximus arcu. Integer eleifend, lorem vitae
+                      sollicitudin lobortis, felis dui iaculis metus, eu sodales
+                      leo diam in sapien. Donec dignissim interdum fringilla.
+                      Sed sit amet dictum sem. Nullam ut dolor eget justo tempus
+                      ornare eget porta massa. In quis gravida metus. Donec
+                      vestibulum suscipit lacus, non ultrices tellus
+                      pellentesque ac. Nulla condimentum, ex id posuere rhoncus,
+                      massa nulla tempus metus, id lacinia neque lectus non sem.
+                      Praesent scelerisque odio massa, ac eleifend tortor
+                      gravida sed. Maecenas eget diam eu metus ultricies
+                      gravida. Ut aliquam convallis vestibulum. Nullam vel
+                      sapien malesuada, eleifend arcu eu, posuere eros. Cras
+                      convallis et mauris id gravida. In at elementum est. Nam
+                      vel tellus vestibulum, gravida nibh a, porta dolor. Nam
+                      faucibus eget risus nec mattis.
+                    </p>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="12" sm="6" md="4">
+                <v-col>
+                  <v-card class="mx-auto">
+                    <v-subheader>Photo</v-subheader>
+                    <v-img
+                      height="150"
+                      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                    >
+                    </v-img> </v-card
+                ></v-col>
+                <v-col>
+                  <v-card class="mx-auto">
+                    <v-subheader>Maps</v-subheader>
+                    <Map
+                      class="mx-auto"
+                      :latitude="chartData.lat[0]"
+                      :longitude="chartData.lng[0]"
+                    />
+                  </v-card>
+                </v-col>
+              </v-col>
+              <v-col cols="12" sm="6" md="2">
+                <v-card class="mx-auto">
+                  <v-subheader>Pergerakan x</v-subheader>
+                </v-card>
+              </v-col>
+              <v-col cols="12" sm="6" md="2">
+                <v-card class="mx-auto">
+                  <v-subheader>Pergerakan y</v-subheader>
+                </v-card>
+              </v-col>
+              <v-col cols="12" sm="6" md="2">
+                <v-card class="mx-auto">
+                  <v-subheader>Pergerakan z</v-subheader>
+                </v-card>
+              </v-col>
+              <v-col cols="12" sm="6" md="3">
+                <v-card class="mx-auto">
+                  <v-subheader>Orientasi</v-subheader>
+                </v-card>
+              </v-col>
+              <v-col cols="12" sm="6" md="3">
+                <v-card class="mx-auto">
+                  <v-subheader>Curah Hujan</v-subheader>
+                </v-card>
+              </v-col>
             </v-row>
-            <v-card class="mx-auto">
-              <v-subheader>Maps</v-subheader>
-              <Map class="mx-auto"
-                :latitude="chartData.lat[0]"
-                :longitude="chartData.lng[0]"
-              />
-            </v-card>
           </v-container>
         </v-card>
       </v-container>
@@ -76,7 +153,7 @@ import { db } from "./db";
 import VueChart from "vue-chart";
 import arusip from "./arusip";
 import moment from "moment";
-import Map from './components/Map.vue'
+import Map from "./components/Map.vue";
 Vue.use(VueChart);
 const dataTampil = 20;
 export default {
@@ -91,10 +168,10 @@ export default {
       grafiks: [],
       chartData: null,
       links: [
-        ["mdi-crosshairs-gps", "Sidomulyo"],
-        ["mdi-crosshairs-gps", "Hargobinangun"],
-        ["mdi-crosshairs-gps", "Imogiri"],
-        ["mdi-crosshairs-gps", "Giripasang"],
+        ["mdi-map-marker", "Sidomulyo"],
+        ["mdi-map-marker", "Hargobinangun"],
+        ["mdi-map-marker", "Imogiri"],
+        ["mdi-map-marker", "Giripasang"],
       ],
     };
   },
@@ -116,16 +193,9 @@ export default {
           nilaiAY_1.push(e.payload_fields.ay);
           nilaiAZ_1.push(e.payload_fields.az);
           tanggal_1.push(e.metadata.time);
-          Vlat.push(e.metadata.latitude)
-          Vlng.push(e.metadata.longitude)
-                      if( tanggal_1===dataTampil){
-                       if( Vlat.length===1 &&  Vlng.length===1){
-              return false;
-            }
-              return false;
-            }
+          Vlat.push(e.metadata.latitude);
+          Vlng.push(e.metadata.longitude);
         }
-
         return true;
       });
       for (let i = 0; i < tanggal_1.length; i++) {
@@ -164,8 +234,8 @@ export default {
             data: nilaiAZ_1,
           },
         ],
-        lat : Vlat,
-        lng : Vlng
+        lat: Vlat,
+        lng: Vlng,
       };
     },
   },
