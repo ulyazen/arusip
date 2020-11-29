@@ -12,6 +12,7 @@ import vuetify from './plugins/vuetify';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import router from './router'
 
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
@@ -29,5 +30,6 @@ Vue.use(rtdbPlugin)
 new Vue({
   el: '#app',
   vuetify,
+  router,
   render: h => h(App)
 });
