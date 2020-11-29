@@ -17,6 +17,7 @@
     "vue": "^2.6.11",
     "vue-chart": "^2.0.0",
     "vue-chartjs": "^3.5.1",
+    "vue-router": "^3.4.9",
     "vue2-leaflet": "^2.6.0",
     "vuefire": "^2.2.4",
     "vuetify": "^2.2.11"

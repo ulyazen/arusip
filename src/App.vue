@@ -101,42 +101,63 @@
                       height="150"
                       src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
                     >
-                    </v-img> </v-card
-                ></v-col>
+                    </v-img>
+                  </v-card>
+                </v-col>
                 <v-col>
                   <v-card class="mx-auto">
                     <v-subheader>Maps</v-subheader>
                     <Map
                       class="mx-auto"
-                      :latitude="chartData.lat[0]"
-                      :longitude="chartData.lng[0]"
+                      :latitude="lati[0]"
+                      :longitude="longi[0]"
                     />
                   </v-card>
                 </v-col>
               </v-col>
               <v-col cols="12" sm="6" md="2">
-                <v-card class="mx-auto">
-                  <v-subheader>Pergerakan x</v-subheader>
+                <v-card color="error" class="mx-auto">
+                  <v-subheader class="white--text">Pergerakan x</v-subheader>
+                  <v-card-text class="white">
+                    <v-icon>mdi-axis-arrow</v-icon>
+                    {{ axNow }}
+                  </v-card-text>
                 </v-card>
               </v-col>
               <v-col cols="12" sm="6" md="2">
-                <v-card class="mx-auto">
-                  <v-subheader>Pergerakan y</v-subheader>
+                <v-card color="primary" class="mx-auto">
+                  <v-subheader class="white--text">Pergerakan y</v-subheader>
+                  <v-card-text class="white">
+                    <v-icon>mdi-axis-arrow</v-icon>
+                    {{ ayNow }}
+                  </v-card-text>
                 </v-card>
               </v-col>
               <v-col cols="12" sm="6" md="2">
-                <v-card class="mx-auto">
-                  <v-subheader>Pergerakan z</v-subheader>
+                <v-card color="success" class="mx-auto">
+                  <v-subheader class="white--text">Pergerakan z</v-subheader>
+                  <v-card-text class="white">
+                    <v-icon>mdi-axis-arrow</v-icon>
+                    {{ azNow }}
+                  </v-card-text>
                 </v-card>
               </v-col>
               <v-col cols="12" sm="6" md="3">
-                <v-card class="mx-auto">
-                  <v-subheader>Orientasi</v-subheader>
+                <v-card color="orange" class="mx-auto">
+                  <v-subheader class="white--text">Orientasi</v-subheader>
+                  <v-card-text class="white">
+                    <v-icon>mdi-compass-rose</v-icon>
+                    {{ axNow }}
+                  </v-card-text>
                 </v-card>
               </v-col>
               <v-col cols="12" sm="6" md="3">
-                <v-card class="mx-auto">
-                  <v-subheader>Curah Hujan</v-subheader>
+                <v-card color="blue lighten-4" class="mx-auto">
+                  <v-subheader class="white--text">Curah Hujan</v-subheader>
+                  <v-card-text class="white">
+                    <v-icon>mdi-weather-rainy</v-icon>
+                    {{ axNow }}
+                  </v-card-text>
                 </v-card>
               </v-col>
             </v-row>
@@ -164,9 +185,15 @@ export default {
         responsive: true,
         maintainAspectRatio: false,
       },
+      lati: null,
+      longi: null,
       drawer: null,
+      axNow: null,
+      ayNow: null,
+      azNow: null,
       grafiks: [],
       chartData: null,
+      coba: [],
       links: [
         ["mdi-map-marker", "Sidomulyo"],
         ["mdi-map-marker", "Hargobinangun"],
@@ -202,6 +229,11 @@ export default {
         let date = moment(tanggal_1[i]).format("HH:mm:ss");
         tanggal_baru_1.push(date);
       }
+      this.lati = Vlat;
+      this.longi = Vlng;
+      this.axNow = nilaiAX_1[0];
+      this.ayNow = nilaiAY_1[0];
+      this.azNow = nilaiAZ_1[0];
       this.chartData = {
         labels: tanggal_baru_1,
         datasets: [
@@ -234,8 +266,6 @@ export default {
             data: nilaiAZ_1,
           },
         ],
-        lat: Vlat,
-        lng: Vlng,
       };
     },
   },

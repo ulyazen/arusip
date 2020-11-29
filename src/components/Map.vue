@@ -11,7 +11,10 @@
 
 <script>
 export default {
-  props: ["longitude", "latitude"],
+  props: {
+    latitude: Number,
+    longitude: Number,
+  },
   data() {
     return {
       url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
