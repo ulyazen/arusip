@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app>
       <v-sheet class="pa-4">
-        <v-avatar color="" class="mb-0" size="64">
+        <v-avatar class="mb-0" size="64">
           <v-icon color="primary" x-large>{{ icon }}</v-icon></v-avatar
         >
         <v-list-item to="/">
@@ -32,6 +32,39 @@
           </v-list-item>
         </v-list-item-group>
       </v-list-item-group>
+
+      <v-list-item>
+        <v-dialog v-model="dialog" persistent max-width="600px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn block color="primary" dark v-bind="attrs" v-on="on" tile
+              ><v-icon left> mdi-plus-box</v-icon> Tambah Lokasi
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="headline">Tambah Lokasi Device</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field label="Nama Lokasi" required></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="dialog = false">
+                Tutup
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="dialog = false">
+                Simpan
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-list-item>
     </v-navigation-drawer>
     <v-main class="grey lighten-4">
       <v-container class="py-0 px-0" fluid>
@@ -55,9 +88,11 @@
 <script>
 export default {
   name: "App",
+
   data() {
     return {
-      icon: "mdi-account-circle",
+      icon: "mdi-compass-rose",
+      dialog: false,
       loading: false,
       drawer: null,
       menuItems: [
@@ -71,10 +106,11 @@ export default {
       ],
     };
   },
+
   watch: {
     loading(val) {
       if (!val) return;
-      setTimeout(() => (this.loading = false), 3000);
+      setTimeout(() => (this.loading = false), 2000);
     },
   },
 };

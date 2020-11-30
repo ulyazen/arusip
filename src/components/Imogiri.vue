@@ -99,7 +99,7 @@
         <v-subheader class="white--text">Pergerakan x</v-subheader>
         <v-card-text class="white">
           <v-icon>mdi-axis-arrow</v-icon>
-          {{ axNow }}
+          {{ axNow[now] }}
         </v-card-text>
       </v-card>
     </v-col>
@@ -108,7 +108,7 @@
         <v-subheader class="white--text">Pergerakan y</v-subheader>
         <v-card-text class="white">
           <v-icon>mdi-axis-arrow</v-icon>
-          {{ ayNow }}
+          {{ ayNow[now] }}
         </v-card-text>
       </v-card>
     </v-col>
@@ -117,7 +117,7 @@
         <v-subheader class="white--text">Pergerakan z</v-subheader>
         <v-card-text class="white">
           <v-icon>mdi-axis-arrow</v-icon>
-          {{ azNow }}
+          {{ azNow[now] }}
         </v-card-text>
       </v-card>
     </v-col>
@@ -126,7 +126,7 @@
         <v-subheader class="white--text">Orientasi</v-subheader>
         <v-card-text class="white">
           <v-icon>mdi-compass-rose</v-icon>
-          {{ axNow }}
+          {{ axNow[now] }}
         </v-card-text>
       </v-card>
     </v-col>
@@ -135,7 +135,7 @@
         <v-subheader class="white--text">Curah Hujan</v-subheader>
         <v-card-text class="white">
           <v-icon>mdi-weather-rainy</v-icon>
-          {{ axNow }}
+          {{ axNow[now] }}
         </v-card-text>
       </v-card>
     </v-col>
@@ -150,7 +150,9 @@ import arusip from "@/arusip";
 import moment from "moment";
 import Map from "@/components/Map.vue";
 Vue.use(VueChart);
-const dataTampil = 20;
+const data = 20;
+const dataTampil = data * 3;
+const batas = dataTampil / 3;
 export default {
   name: "App",
   data() {
@@ -188,6 +190,9 @@ export default {
           tanggal_1.push(e.metadata.time);
           Vlat.push(e.metadata.latitude);
           Vlng.push(e.metadata.longitude);
+          if (tanggal_1.length === batas) {
+            return false;
+          }
         }
         return true;
       });
@@ -197,9 +202,9 @@ export default {
       }
       this.lati = Vlat;
       this.longi = Vlng;
-      this.axNow = nilaiAX_1[dataTampil - 1];
-      this.ayNow = nilaiAY_1[dataTampil - 1];
-      this.azNow = nilaiAZ_1[dataTampil - 1];
+      this.axNow = nilaiAX_1;
+      this.ayNow = nilaiAY_1;
+      this.azNow = nilaiAZ_1;
       this.chartData = {
         labels: tanggal_baru_1,
         datasets: [
@@ -233,6 +238,11 @@ export default {
           },
         ],
       };
+    },
+  },
+  computed: {
+    now: function () {
+      return batas - 1;
     },
   },
   components: { arusip, Map },
