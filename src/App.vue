@@ -58,7 +58,7 @@
               <v-btn color="blue darken-1" text @click="dialog = false">
                 Tutup
               </v-btn>
-              <v-btn color="blue darken-1" text @click="dialog = false">
+              <v-btn color="blue darken-1" text @click="dialog = false">  
                 Simpan
               </v-btn>
             </v-card-actions>

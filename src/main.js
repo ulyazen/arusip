@@ -14,6 +14,7 @@ import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import router from './router'
 
+
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
 Vue.component('l-marker', LMarker);
